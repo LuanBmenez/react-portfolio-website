@@ -1,7 +1,6 @@
 import { X } from "lucide-react";
 import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Key } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -37,10 +36,10 @@ export const NavBar = () => {
           href="#hero"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground ml-[100px] ">
-              Luan Menezes 
+            <span className="text-glow text-foreground ml-[100px]"> 
+              Luan Menezes
             </span>
-             Portifolio
+            Portifolio
           </span>
         </a>
 
