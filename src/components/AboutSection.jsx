@@ -24,7 +24,8 @@ export const AboutSection = () => {
                 Entre em contato
               </a>
               <a
-                href="#contact"
+                href="/src/assets/Curriculo Luan Menezes.pdf"
+                download="Curriculo Luan Menezes.pdf"
                 className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
               >
                 Download CV
