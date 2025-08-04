@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 
 const navItems = [
   { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "Sobre", href: "#about" },
+  { name: "Habilidades", href: "#skills" },
+  { name: "Projetos", href: "#projects" },
+  { name: "Contato", href: "#contact" },
 ];
 
 export const NavBar = () => {
@@ -17,11 +17,15 @@ export const NavBar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      if (typeof window !== 'undefined') {
+        setIsScrolled(window.scrollY > 10);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (typeof window !== 'undefined') {
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
   }, []);
   return (
     <nav
@@ -32,22 +36,19 @@ export const NavBar = () => {
     >
       <div className="container flex items-center justify-between">
         <a
-          className="text-xl font-bold text-primary flex items-center"
+          className="text-xl font-bold flex items-center gap-2"
           href="#hero"
+          aria-label="Ir para o início da página"
         >
-          <span className="relative z-10">
-            <span className="text-glow text-foreground ml-[100px]"> 
-              Luan Menezes
-            </span>
-            Portifolio
-          </span>
+          <span className="text-primary">Luan Menezes</span>
+          <span className="text-foreground/80">Portfólio</span>
         </a>
 
         {/*desktop*/}
         <div className="hidden md:flex space-x-8">
-          {navItems.map((item, key) => (
+          {navItems.map((item) => (
             <a
-              key={key}
+              key={item.name}
               href={item.href}
               className="text-foreground/80 hover:text-primary transition-colors duration-300"
             >
@@ -74,10 +75,10 @@ export const NavBar = () => {
               : "opacity-0 pointer-events-none"
           )}
         >
-          <div className="flex flex-col  space-y-8 text-xl">
-            {navItems.map((item, key) => (
+          <div className="flex flex-col space-y-8 text-xl">
+            {navItems.map((item) => (
               <a
-                key={key}
+                key={item.name}
                 href={item.href}
                 className="text-foreground/80 hover:text-primary transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}

@@ -1,4 +1,4 @@
-import { Briefcase, Code, User } from "lucide-react";
+import { Briefcase, Code, User, Download } from "lucide-react";
 
 export const AboutSection = () => {
   return (
@@ -20,14 +20,21 @@ export const AboutSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-              <a href="#contact" className="cosmic-button">
+              <a 
+                href="#contact" 
+                className="cosmic-button"
+                aria-label="Ir para seção de contato"
+              >
                 Entre em contato
               </a>
               <a
                 href="/Curriculo Luan Menezes.pdf"
-                download="Curriculo Luan Menezes.pdf"
-                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+                download="Curriculo-Luan-Menezes.pdf"
+                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300 flex items-center gap-2 justify-center"
+                aria-label="Baixar currículo em PDF"
+                type="application/pdf"
               >
+                <Download className="h-4 w-4" />
                 Download CV
               </a>
             </div>
@@ -59,8 +66,8 @@ export const AboutSection = () => {
                 <div className="text-left">
                   <h4 className="font-semibold text-lg">Estudante de ADS</h4>
                   <p className="text-muted-foreground">
-                    Estudante de Analise e desenvolvimento de sistemas, onde
-                    pego uma base solida sobre o mundo da programação
+                    Estudante de Análise e Desenvolvimento de Sistemas, onde
+                    construo uma base sólida sobre o mundo da programação
                   </p>
                 </div>
               </div>

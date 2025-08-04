@@ -3,43 +3,45 @@ import { useEffect, useState } from "react";
 import { cn } from "../lib/utils";
 
 export const ThemeToggle = () => {
-  const [isDarkMod, SetIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-    if (storedTheme == "dark") {
-      SetIsDarkMode(true);
+    if (storedTheme === "dark") {
+      setIsDarkMode(true);
       document.documentElement.classList.add("dark");
     } else {
       localStorage.setItem("theme", "light");
-      SetIsDarkMode(false);
+      setIsDarkMode(false);
     }
   }, []);
 
   const toggleTheme = () => {
-    if (isDarkMod) {
+    if (isDarkMode) {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
-      SetIsDarkMode(false);
+      setIsDarkMode(false);
     } else {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
-      SetIsDarkMode(true);
+      setIsDarkMode(true);
     }
   };
 
   return (
     <button
       onClick={toggleTheme}
+      aria-label={isDarkMode ? "Ativar tema claro" : "Ativar tema escuro"}
       className={cn(
-        "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300 cursor-pointer",
-        "focus:outline-hidden"
+        "fixed max-sm:hidden top-5 right-5 z-50 p-3 rounded-full transition-all duration-300",
+        "bg-background/80 backdrop-blur-sm border border-border shadow-lg",
+        "hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary"
       )}
     >
-      {isDarkMod ? (
-        <Sun className="h-6 w-6 text-yellow-300" />
+      {isDarkMode ? (
+        <Sun className="h-5 w-5 text-yellow-500" />
       ) : (
-        <Moon className="h-6 w-6 text-blue-900" />
+        <Moon className="h-5 w-5 text-slate-700 dark:text-slate-300" />
       )}
     </button>
   );

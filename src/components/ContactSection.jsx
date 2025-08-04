@@ -44,8 +44,7 @@ export const ContactSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-8">
             <h3 className="text-2xl font-semibold mb-6">
-              {" "}
-              Informações de contato
+              Informações de Contato
             </h3>
 
             <div className="space-y-6 justify-center">
@@ -54,12 +53,12 @@ export const ContactSection = () => {
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium"> Email</h4>
+                  <h4 className="font-medium">Email</h4>
                   <a
                     href="mailto:Menezluan120@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    dev@gmail.com
+                    Menezluan120@gmail.com
                   </a>
                 </div>
               </div>
@@ -68,7 +67,7 @@ export const ContactSection = () => {
                   <Phone className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium"> Telefone</h4>
+                  <h4 className="font-medium">Telefone</h4>
                   <a
                     href="tel:+5574999108336"
                     className="text-muted-foreground hover:text-primary transition-colors"
@@ -82,34 +81,49 @@ export const ContactSection = () => {
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium"> Cep</h4>
-                  <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Jacobina,BA,Brasil
-                  </a>
+                  <h4 className="font-medium">Localização</h4>
+                  <span className="text-muted-foreground">
+                    Jacobina, BA, Brasil
+                  </span>
                 </div>
               </div>
             </div>
             <div className="pt-8">
-              <h4 className="font-medium mb-4">Venha me conhecer</h4>
+              <h4 className="font-medium mb-4">Redes Sociais</h4>
               <div className="flex space-x-4 justify-center">
-                <a href="https://www.linkedin.com/in/luan-menezes/" target="_blank">
-                  <Linkedin />
+                <a 
+                  href="https://www.linkedin.com/in/luan-menezes/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Perfil do LinkedIn"
+                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
+                >
+                  <Linkedin className="h-6 w-6 text-primary" />
                 </a>
-                <a href="https://www.instagram.com/luanbmenez/" target="_blank">
-                  <Instagram />
+                <a 
+                  href="https://www.instagram.com/luanbmenez/" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Perfil do Instagram"
+                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
+                >
+                  <Instagram className="h-6 w-6 text-primary" />
                 </a>
-                <a href="https://github.com/LuanBmenez" target="_blank">
-                  <Github />
+                <a 
+                  href="https://github.com/LuanBmenez" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Perfil do GitHub"
+                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
+                >
+                  <Github className="h-6 w-6 text-primary" />
                 </a>
               </div>
             </div>
           </div>
-          <div
-            className="bg-card p-8 rounded-lg shadow-xs"
-            onSubmit={handleSubmit}
-          >
-            <h3 className="text-2xl font-semibold mb-6"> Envie uma mensagem</h3>
-            <form className="space-y-6">
+          <div className="bg-card p-8 rounded-lg shadow-xs">
+            <h3 className="text-2xl font-semibold mb-6">Envie uma mensagem</h3>
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="name"
@@ -122,8 +136,8 @@ export const ContactSection = () => {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
-                  placeholder="Luan Menezes"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  placeholder="Digite seu nome completo"
                 />
               </div>
               <div>
@@ -138,8 +152,8 @@ export const ContactSection = () => {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
-                  placeholder="Menezl@gmail.com"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary transition-all"
+                  placeholder="seu.email@exemplo.com"
                 />
               </div>
               <div>
@@ -153,8 +167,9 @@ export const ContactSection = () => {
                   id="message"
                   name="message"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
-                  placeholder="Olá, gostaria de falar sobre..."
+                  rows={5}
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none transition-all"
+                  placeholder="Olá Luan, gostaria de conversar sobre..."
                 />
               </div>
               <button
