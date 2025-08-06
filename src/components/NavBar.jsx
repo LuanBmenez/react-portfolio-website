@@ -36,7 +36,7 @@ export const NavBar = () => {
     >
       <div className="container flex items-center justify-between">
         <a
-          className="text-xl font-bold flex items-center gap-2"
+          className="text-xl font-bold flex items-center gap-2 ml-4"
           href="#hero"
           aria-label="Ir para o início da página"
         >
