@@ -13,7 +13,7 @@ const projects = [
     tags: ["React", "Nodejs", "mongodb", "StyledComponents"],
     demoUrl: "https://12-weeks.vercel.app/",
     githubUrl: "https://github.com/LuanBmenez/12Weeks",
-    date: "2024",
+    date: "2025",
     status: "Em desenvolvimento",
     features: ["Autenticação de usuários", "Dashboard de metas", "Acompanhamento de progresso", "Hasheamento de senhas"],
     category: "FullStack"
@@ -28,7 +28,7 @@ const projects = [
     tags: ["React", "Javascript", "StyledComponents"],
     demoUrl: "https://instagram-react-xi.vercel.app/",
     githubUrl: "https://github.com/LuanBmenez/InstagramReact",
-    date: "2024",
+    date: "2025",
     status: "Concluído",
     features: ["Interface responsiva", "Feed de posts", "Sistema de stories", "Interações sociais"],
     category: "Frontend"
@@ -43,8 +43,8 @@ const projects = [
     tags: ["React", "Javascript", "Tailwind CSS"],
     demoUrl: "https://react-portfolio-website-gilt-nine.vercel.app/",
     githubUrl: "https://github.com/LuanBmenez/react-portfolio-website",
-    date: "2024",
-    status: "Concluído",
+    date: "2025",
+    status: "Em desenvolvimento",
     features: ["Design responsivo", "Tema escuro/claro", "Formulário de contato", "Animações suaves"],
     category: "Frontend"
   },
