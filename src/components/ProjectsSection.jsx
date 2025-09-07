@@ -5,7 +5,7 @@ const projects = [
     id: 1,
     title: "12Weeks",
     description:
-      "Uma das minhas primeiras aplicações usando fullstack onde fiz um site de metas para ajudar a criar hábitos, em breve atualizações ",
+      "Uma das minhas primeiras aplicações fullstack onde fiz um site de metas para ajudar a criar hábitos, em breve atualizações ",
     image: "/projects/12weeksPagina.png",
     tags: ["React", "Nodejs","mongodb", "StyledComponents"],
     demoUrl: "https://12-weeks.vercel.app/",
