@@ -3,13 +3,13 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "FilmesFlix",
+    title: "12Weeks",
     description:
-      "Uma das minhas primeiras aplicações em react onde fiz uma lista de filmes, em breve atualizações ",
-    image: "/projects/FilmesFlix.png",
-    tags: ["React", "Javascript", "StyledComponents"],
-    demoUrl: "https://filmes-flix-rho.vercel.app/",
-    githubUrl: "https://github.com/LuanBmenez/FilmesFlix",
+      "Uma das minhas primeiras aplicações usando fullstack onde fiz um site de metas para ajudar a criar hábitos, em breve atualizações ",
+    image: "/projects/12WeeksPagina.png",
+    tags: ["React", "Nodejs","mongodb", "StyledComponents"],
+    demoUrl: "https://12weeks.vercel.app/",
+    githubUrl: "https://github.com/LuanBmenez/12Weeks",
   },
   {
     id: 2,
