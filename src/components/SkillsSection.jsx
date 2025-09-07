@@ -40,10 +40,10 @@ export const SkillsSection = () => {
               key={key}
               onClick={() => setActiveCategory(category)}
               className={cn(
-                "px-5 py-2 rounded-full transition-colors duration-300 capitalize",
+                "px-5 py-2 rounded-full transition-all duration-300 capitalize hover:scale-105",
                 activeCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary/70 text-foreground hover:bg-secondary" 
+                  ? "bg-primary text-primary-foreground shadow-lg"
+                  : "bg-secondary/70 text-foreground hover:bg-secondary hover:shadow-md"
               )}
             >
               {category}
@@ -55,25 +55,40 @@ export const SkillsSection = () => {
           {filteredSkills.map((skill, key) => (
             <div
               key={key}
-              className="bg-card p-6 rounded-lg shadow-xs card-hover"
+              className="bg-card p-6 rounded-lg shadow-xs card-hover group"
             >
               <div className="text-left mb-4">
-                <h3 className="font-semibold text-lg">{skill.name}</h3>
+                <h3 className="font-semibold text-lg group-hover:text-primary transition-colors duration-300">
+                  {skill.name}
+                </h3>
               </div>
-              <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-secondary/50 h-3 rounded-full overflow-hidden">
                 <div
-                  className="bg-primary h-2 rounded-full origin-left animate-[grow_1.5s_ease-out]" 
-                  style={{ width: skill.level + "%" }} 
+                  className="bg-gradient-to-r from-primary to-purple-500 h-3 rounded-full origin-left transition-all duration-1000 ease-out group-hover:shadow-lg"
+                  style={{ width: skill.level + "%" }}
                 />
               </div>
 
-              <div className="text-right mt-1">
-                <span className="text-sm text-muted-foreground">
+              <div className="flex justify-between items-center mt-2">
+                <span className="text-xs text-muted-foreground">
+                  Proficiência
+                </span>
+                <span className="text-sm font-medium text-primary">
                   {skill.level}%
                 </span>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Skills counter */}
+        <div className="mt-12 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary">
+            <span className="text-sm font-medium">
+              {filteredSkills.length} tecnologias{" "}
+              {activeCategory !== "all" && `em ${activeCategory}`}
+            </span>
+          </div>
         </div>
       </div>
     </section>
