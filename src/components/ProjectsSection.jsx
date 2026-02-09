@@ -10,7 +10,7 @@ const projects = [
       "Uma das minhas primeiras aplicações fullstack onde fiz um site de metas para ajudar a criar hábitos, em breve atualizações ",
     longDescription: "12Weeks é uma aplicação completa de gerenciamento de metas e hábitos. Desenvolvida com foco na experiência do usuário, permite criar metas de 12 semanas com acompanhamento diário, visualização de progresso e gamificação para manter a motivação.",
     image: "/projects/12weeksPagina.png",
-    tags: ["React", "Nodejs", "mongodb", "StyledComponents"],
+    tags: ["React", "Nodejs", "Mongodb", "StyledComponents"],
     demoUrl: "https://12-weeks.vercel.app/",
     githubUrl: "https://github.com/LuanBmenez/12Weeks",
     date: "2025",

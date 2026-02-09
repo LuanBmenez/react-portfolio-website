@@ -138,25 +138,25 @@ export const HeroSection = () => {
               className="cosmic-button group flex items-center gap-2"
               aria-label="Ver meus projetos"
             >
-              <Briefcase className="h-4 w-4 group-hover:rotate-12 transition-transform" />
+              <Briefcase className="h-4 w-4 group-hover:rotate-12 transition-transform" aria-hidden="true" focusable="false" />
               Ver Projetos
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition-all duration-300 flex items-center gap-2 group"
+              className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition-all duration-300 flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               aria-label="Entrar em contato"
             >
               <Mail className="h-4 w-4 group-hover:scale-110 transition-transform" />
               Contato
             </a>
             <a
-              href="/Curriculo Luan Menezes.pdf"
-              download="Curriculo-Luan-Menezes.pdf"
-              className="px-6 py-3 rounded-full border border-border text-foreground hover:bg-secondary transition-all duration-300 flex items-center gap-2 group"
-              aria-label="Baixar currículo"
+              href="/curriculo-luan-menezes.pdf"
+              download="Curriculo_Luan_Menezes.pdf"
+              className="px-6 py-3 rounded-full border border-border text-foreground hover:bg-secondary transition-all duration-300 flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+              aria-label="Baixar currículo, PDF"
             >
-              <Download className="h-4 w-4 group-hover:scale-110 transition-transform" />
-              CV
+              <Download className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" focusable="false" />
+              Baixar currículo
             </a>
           </div>
 

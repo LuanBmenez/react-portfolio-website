@@ -19,14 +19,14 @@ export const Home = () => {
       <NavBar />
       {/* Main Content */}
       <main>
-        <HeroSection/>
-        <AboutSection/>
-        <SkillsSection/>
-        <ProjectsSection/>
-        <ContactSection/>
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
       </main>
       {/* Footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 };
