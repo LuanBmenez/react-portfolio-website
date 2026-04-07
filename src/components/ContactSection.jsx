@@ -6,7 +6,6 @@ import {
   MapPin,
   Phone,
   Send,
-  MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
@@ -63,7 +62,7 @@ export const ContactSection = () => {
         break;
       case "email":
         if (value && !validateEmail(value)) {
-          newErrors.email = "Email invalido";
+          newErrors.email = "Email inválido";
         } else {
           delete newErrors.email;
         }
@@ -97,15 +96,15 @@ export const ContactSection = () => {
     const finalErrors = {};
     if (formData.name.length < 2)
       finalErrors.name = "Nome deve ter pelo menos 2 caracteres";
-    if (!validateEmail(formData.email)) finalErrors.email = "Email invalido";
+    if (!validateEmail(formData.email)) finalErrors.email = "Email inválido";
     if (formData.message.length < 10)
       finalErrors.message = "Mensagem deve ter pelo menos 10 caracteres";
 
     if (Object.keys(finalErrors).length > 0) {
       setErrors(finalErrors);
       toast({
-        title: "Erro de validacao",
-        description: "Por favor, corrija os erros no formulario.",
+        title: "Erro de validação",
+        description: "Por favor, corrija os erros no formulário.",
         variant: "destructive",
       });
       return;
@@ -115,7 +114,7 @@ export const ContactSection = () => {
 
     try {
       if (EMAILJS_CONFIG.serviceId === "service_your_service_id") {
-        throw new Error("EmailJS nao configurado");
+        throw new Error("EmailJS não configurado");
       }
 
       await emailjs.send(
@@ -133,7 +132,7 @@ export const ContactSection = () => {
       toast({
         title: "Mensagem enviada com sucesso!",
         description:
-          "Obrigado pela sua mensagem. Entrarei em contato em breve.",
+          "Obrigado pela sua mensagem. Entrarei em contato com você em breve.",
       });
 
       setFormData({
@@ -144,7 +143,7 @@ export const ContactSection = () => {
     } catch (error) {
       console.error("Erro ao enviar mensagem:", error);
 
-      const subject = encodeURIComponent("Contato do Portfolio");
+      const subject = encodeURIComponent("Contato do Portfólio");
       const body = encodeURIComponent(
         `Nome: ${formData.name}\nEmail: ${formData.email}\n\nMensagem:\n${formData.message}`
       );
@@ -159,249 +158,221 @@ export const ContactSection = () => {
       setIsSubmitting(false);
     }
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: "Menezluan120@gmail.com",
-      href: "mailto:Menezluan120@gmail.com",
-    },
-    {
-      icon: Phone,
-      title: "Telefone",
-      value: "+55 (74) 99910-8336",
-      href: "tel:+5574999108336",
-    },
-    {
-      icon: MapPin,
-      title: "Localizacao",
-      value: "Jacobina, BA, Brasil",
-      href: null,
-    },
-  ];
-
-  const socialLinks = [
-    { icon: Linkedin, href: "https://www.linkedin.com/in/luan-menezes/", label: "LinkedIn" },
-    { icon: Instagram, href: "https://www.instagram.com/luanbmenez/", label: "Instagram" },
-    { icon: Github, href: "https://github.com/LuanBmenez", label: "GitHub" },
-  ];
-
   return (
     <section
       ref={sectionRef}
       id="contact"
-      className="py-28 px-4 relative bg-secondary/30"
+      className="py-24 px-4 relative bg-secondary/30"
     >
-      {/* Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/3 rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto max-w-5xl relative z-10">
-        {/* Header */}
+      <div className="container mx-auto max-w-5xl">
         <div
           className={cn(
-            "text-center mb-16 transition-all duration-1000",
+            "transition-all duration-700 transform",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            Contato
-          </span>
-          <h2 className="section-title">
-            Vamos <span className="text-gradient">conversar</span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
+            Entre Em<span className="text-primary"> Contato</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4">
-            Tem um projeto em mente? Estou sempre aberto a discutir novas oportunidades.
+
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Tem um projeto em mente? Entre em contato. Estou sempre aberto a
+            discutir novas oportunidades.
           </p>
         </div>
 
         <div
           className={cn(
-            "grid grid-cols-1 lg:grid-cols-5 gap-8 transition-all duration-1000 delay-200",
+            "grid grid-cols-1 md:grid-cols-2 gap-12 transition-all duration-700 transform delay-200",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           )}
         >
-          {/* Contact info */}
-          <div className="lg:col-span-2 space-y-6">
-            <h3 className="text-xl font-semibold flex items-center gap-2">
-              <MessageSquare className="h-5 w-5 text-primary" />
-              Informacoes
+          <div className="space-y-8">
+            <h3 className="text-2xl font-semibold mb-6">
+              Informações de Contato
             </h3>
 
-            <div className="space-y-4">
-              {contactInfo.map((item, index) => {
-                const IconComponent = item.icon;
-                const content = (
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 group">
-                    <div className="p-2.5 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <IconComponent className="h-5 w-5 text-primary" />
-                    </div>
-                    <div className="text-left">
-                      <p className="text-sm text-muted-foreground">{item.title}</p>
-                      <p className="font-medium text-foreground group-hover:text-primary transition-colors">
-                        {item.value}
-                      </p>
-                    </div>
-                  </div>
-                );
-
-                return item.href ? (
-                  <a key={index} href={item.href} className="block">
-                    {content}
+            <div className="space-y-6 justify-center">
+              <div className="flex items-start space-x-4">
+                <div className="p-3 rounded-full bg-primary/10">
+                  <Mail className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-medium">Email</h4>
+                  <a
+                    href="mailto:Menezluan120@gmail.com"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Menezluan120@gmail.com
                   </a>
-                ) : (
-                  <div key={index}>{content}</div>
-                );
-              })}
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="p-3 rounded-full bg-primary/10">
+                  <Phone className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-medium">Telefone</h4>
+                  <a
+                    href="tel:+5574999108336"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    +55 (74) 99910-8336
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-start space-x-4">
+                <div className="p-3 rounded-full bg-primary/10">
+                  <MapPin className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-medium">Localização</h4>
+                  <span className="text-muted-foreground">
+                    Jacobina, BA, Brasil
+                  </span>
+                </div>
+              </div>
             </div>
-
-            {/* Social links */}
-            <div className="pt-4">
-              <p className="text-sm text-muted-foreground mb-4">Redes sociais</p>
-              <div className="flex gap-3">
-                {socialLinks.map((link, index) => {
-                  const IconComponent = link.icon;
-                  return (
-                    <a
-                      key={index}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={link.label}
-                      className="p-3 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300 group"
-                    >
-                      <IconComponent className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                    </a>
-                  );
-                })}
+            <div className="pt-8">
+              <h4 className="font-medium mb-4">Redes Sociais</h4>
+              <div className="flex space-x-4 justify-center">
+                <a
+                  href="https://www.linkedin.com/in/luan-menezes/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Perfil do LinkedIn"
+                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
+                >
+                  <Linkedin className="h-6 w-6 text-primary" />
+                </a>
+                <a
+                  href="https://www.instagram.com/luanbmenez/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Perfil do Instagram"
+                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
+                >
+                  <Instagram className="h-6 w-6 text-primary" />
+                </a>
+                <a
+                  href="https://github.com/LuanBmenez"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Perfil do GitHub"
+                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
+                >
+                  <Github className="h-6 w-6 text-primary" />
+                </a>
               </div>
             </div>
           </div>
-
-          {/* Contact form */}
-          <div className="lg:col-span-3">
-            <div className="glass-card p-6 md:p-8">
-              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                <Send className="h-5 w-5 text-primary" />
-                Envie uma mensagem
-              </h3>
-
-              <form className="space-y-5" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium mb-2 text-left"
-                    >
-                      Nome
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className={cn(
-                        "w-full px-4 py-3 rounded-xl border bg-background/50 focus:outline-none focus:ring-2 transition-all duration-300",
-                        errors.name
-                          ? "border-rose-500 focus:ring-rose-500/50"
-                          : "border-border focus:ring-primary/50 focus:border-primary"
-                      )}
-                      placeholder="Seu nome"
-                    />
-                    {errors.name && (
-                      <p className="text-rose-500 text-xs mt-1.5 text-left">{errors.name}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium mb-2 text-left"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className={cn(
-                        "w-full px-4 py-3 rounded-xl border bg-background/50 focus:outline-none focus:ring-2 transition-all duration-300",
-                        errors.email
-                          ? "border-rose-500 focus:ring-rose-500/50"
-                          : "border-border focus:ring-primary/50 focus:border-primary"
-                      )}
-                      placeholder="seu@email.com"
-                    />
-                    {errors.email && (
-                      <p className="text-rose-500 text-xs mt-1.5 text-left">{errors.email}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium mb-2 text-left"
-                  >
-                    Mensagem
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className={cn(
-                      "w-full px-4 py-3 rounded-xl border bg-background/50 focus:outline-none focus:ring-2 resize-none transition-all duration-300",
-                      errors.message
-                        ? "border-rose-500 focus:ring-rose-500/50"
-                        : "border-border focus:ring-primary/50 focus:border-primary"
-                    )}
-                    placeholder="Ola Luan, gostaria de conversar sobre..."
-                  />
-                  <div className="flex justify-between items-center mt-1.5">
-                    {errors.message ? (
-                      <p className="text-rose-500 text-xs">{errors.message}</p>
-                    ) : (
-                      <span />
-                    )}
-                    <span className="text-xs text-muted-foreground">
-                      {formData.message.length}/10 min
-                    </span>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting || Object.keys(errors).length > 0}
-                  className={cn(
-                    "cosmic-button w-full inline-flex items-center justify-center gap-2 mt-2",
-                    (isSubmitting || Object.keys(errors).length > 0) &&
-                      "opacity-50 cursor-not-allowed hover:scale-100"
-                  )}
+          <div className="bg-card p-8 rounded-lg shadow-xs">
+            <h3 className="text-2xl font-semibold mb-6">Envie uma mensagem</h3>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium mb-2"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                      Enviando...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-4 w-4" />
-                      Enviar Mensagem
-                    </>
+                  Seu nome
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className={cn(
+                    "w-full px-4 py-3 rounded-md border bg-background focus:outline-none focus:ring-2 transition-all",
+                    errors.name
+                      ? "border-red-500 focus:ring-red-500"
+                      : "border-input focus:ring-primary"
                   )}
-                </button>
-              </form>
-            </div>
+                  placeholder="Digite seu nome completo"
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                )}
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium mb-2"
+                >
+                  Seu email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className={cn(
+                    "w-full px-4 py-3 rounded-md border bg-background focus:outline-none focus:ring-2 transition-all",
+                    errors.email
+                      ? "border-red-500 focus:ring-red-500"
+                      : "border-input focus:ring-primary"
+                  )}
+                  placeholder="seu.email@exemplo.com"
+                />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
+              </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium mb-2"
+                >
+                  Sua mensagem
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className={cn(
+                    "w-full px-4 py-3 rounded-md border bg-background focus:outline-none focus:ring-2 resize-none transition-all",
+                    errors.message
+                      ? "border-red-500 focus:ring-red-500"
+                      : "border-input focus:ring-primary"
+                  )}
+                  placeholder="Olá Luan, gostaria de conversar sobre..."
+                />
+                {errors.message && (
+                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                )}
+                <p className="text-xs text-muted-foreground mt-1">
+                  {formData.message.length}/10 caracteres mínimos
+                </p>
+              </div>
+              <button
+                type="submit"
+                disabled={isSubmitting || Object.keys(errors).length > 0}
+                className={cn(
+                  "cosmic-button w-full flex items-center justify-center gap-2 transition-all duration-300",
+                  isSubmitting || Object.keys(errors).length > 0
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:scale-105"
+                )}
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    Enviar Mensagem
+                    <Send size={16} />
+                  </>
+                )}
+              </button>
+            </form>
           </div>
         </div>
       </div>

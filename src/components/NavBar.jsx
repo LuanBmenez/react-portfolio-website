@@ -1,11 +1,11 @@
 import { X, Menu, Home, User, Code, Briefcase, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 const navItems = [
   { name: "Home", href: "#hero", icon: Home },
   { name: "Sobre", href: "#about", icon: User },
-  { name: "Skills", href: "#skills", icon: Code },
+  { name: "Habilidades", href: "#skills", icon: Code },
   { name: "Projetos", href: "#projects", icon: Briefcase },
   { name: "Contato", href: "#contact", icon: Mail },
 ];
@@ -17,14 +17,16 @@ export const NavBar = () => {
   const menuButtonRef = useRef(null);
   const menuRef = useRef(null);
 
+  // small scroll listener to toggle compact nav
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const onScroll = () => setIsScrolled(window.scrollY > 50);
+    const onScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // IntersectionObserver for scroll-spy (active section)
   useEffect(() => {
     if (typeof window === "undefined") return;
     const ids = navItems.map((i) => i.href.replace("#", ""));
@@ -47,6 +49,7 @@ export const NavBar = () => {
     return () => observer.disconnect();
   }, []);
 
+  // focus trap and keyboard handling for mobile menu
   useEffect(() => {
     if (!isMenuOpen || !menuRef.current) return;
     const focusableSelector = 'a, button, [tabindex]:not([tabindex="-1"])';
@@ -80,6 +83,7 @@ export const NavBar = () => {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [isMenuOpen]);
 
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (typeof document === "undefined") return;
     const previous = document.body.style.overflow;
@@ -98,47 +102,46 @@ export const NavBar = () => {
       });
     }
     setIsMenuOpen(false);
+    // return focus to menu button for accessibility
     setTimeout(() => menuButtonRef.current?.focus(), 0);
   };
-
   return (
     <nav
       role="navigation"
       aria-label="Main navigation"
       className={cn(
-        "fixed w-full z-40 transition-all duration-500",
+        "fixed w-full z-40 transition-all duration-300",
         isScrolled
-          ? "py-3 bg-background/80 backdrop-blur-xl border-b border-border/50"
-          : "py-5 bg-transparent",
+          ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"
+          : "py-5",
       )}
     >
       <div className="container flex items-center justify-between">
-        {/* Logo */}
         <a
-          className="flex items-center gap-3 ml-4 group transition-all duration-300"
+          className="text-xl font-bold flex items-center gap-2 ml-4 group transition-all duration-300 hover:scale-105"
           href="#hero"
           onClick={(e) => {
             e.preventDefault();
             scrollToSection("#hero");
           }}
-          aria-label="Ir para o inicio da pagina"
+          aria-label="Ir para o início da página"
         >
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-teal-400 rounded-xl flex items-center justify-center group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/25 transition-all duration-300">
-            <span className="text-primary-foreground font-bold text-lg">L</span>
+          <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">
+            <span className="text-primary-foreground font-bold text-sm">L</span>
           </div>
           <div className="flex flex-col">
-            <span className="font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
+            <span className="text-primary group-hover:text-primary/80 transition-colors">
               Luan Menezes
             </span>
-            <span className="text-xs text-muted-foreground -mt-0.5">
+            <span className="text-xs text-foreground/60 -mt-1">
               Desenvolvedor
             </span>
           </div>
         </a>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-card/50 backdrop-blur-sm border border-border/50">
+        <div className="hidden md:flex space-x-1">
           {navItems.map((item) => {
+            const IconComponent = item.icon;
             const isActive = activeSection === item.href.replace("#", "");
 
             return (
@@ -151,61 +154,67 @@ export const NavBar = () => {
                 }}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 relative",
+                  "flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 group relative",
                   isActive
-                    ? "text-primary-foreground bg-primary shadow-md shadow-primary/25"
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50",
+                    ? "text-primary bg-primary/10"
+                    : "text-foreground/80 hover:text-primary hover:bg-primary/5",
                 )}
               >
-                {item.name}
+                <IconComponent
+                  size={16}
+                  className={cn(
+                    "transition-transform duration-300",
+                    isActive ? "scale-110" : "group-hover:scale-110",
+                  )}
+                />
+                <span className="font-medium">{item.name}</span>
+                {isActive && (
+                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />
+                )}
               </a>
             );
           })}
         </div>
 
-        {/* Mobile menu button */}
         <button
           ref={menuButtonRef}
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className={cn(
-            "md:hidden p-2.5 rounded-xl z-50 transition-all duration-300",
-            isMenuOpen 
-              ? "bg-primary text-primary-foreground" 
-              : "bg-card/50 backdrop-blur-sm border border-border/50 hover:bg-secondary/50",
+            "md:hidden p-2 text-foreground z-50 transition-all duration-300 rounded-lg",
+            isMenuOpen ? "bg-primary/10 text-primary" : "hover:bg-primary/5",
           )}
           aria-label={isMenuOpen ? "Fechar Menu" : "Abrir Menu"}
           aria-expanded={isMenuOpen}
         >
-          <div className="relative w-5 h-5">
+          <div className="relative w-6 h-6">
             <Menu
-              size={20}
+              size={24}
               className={cn(
-                "absolute inset-0 transition-all duration-300",
-                isMenuOpen ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100",
+                "absolute transition-all duration-300",
+                isMenuOpen ? "opacity-0 rotate-90" : "opacity-100 rotate-0",
               )}
             />
             <X
-              size={20}
+              size={24}
               className={cn(
-                "absolute inset-0 transition-all duration-300",
-                isMenuOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0",
+                "absolute transition-all duration-300",
+                isMenuOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-90",
               )}
             />
           </div>
         </button>
 
-        {/* Mobile menu */}
         <div
           className={cn(
-            "fixed inset-0 bg-background/98 backdrop-blur-xl z-40 flex flex-col items-center justify-center",
-            "transition-all duration-500 md:hidden",
+            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
+            "transition-all duration-300 md:hidden",
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none",
           )}
           ref={menuRef}
         >
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col space-y-6 text-xl">
             {navItems.map((item, index) => {
               const IconComponent = item.icon;
               const isActive = activeSection === item.href.replace("#", "");
@@ -220,19 +229,29 @@ export const NavBar = () => {
                   }}
                   aria-current={isActive ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-4 px-8 py-4 rounded-2xl transition-all duration-300 min-w-[200px]",
+                    "flex items-center gap-4 px-6 py-3 rounded-full transition-all duration-300 group",
                     isActive
-                      ? "text-primary-foreground bg-primary shadow-lg shadow-primary/25"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50",
+                      ? "text-primary bg-primary/10 scale-105"
+                      : "text-foreground/80 hover:text-primary hover:bg-primary/5 hover:scale-105",
                   )}
                   style={{
-                    transitionDelay: isMenuOpen ? `${index * 50}ms` : "0ms",
-                    transform: isMenuOpen ? "translateY(0)" : "translateY(20px)",
-                    opacity: isMenuOpen ? 1 : 0,
+                    transitionDelay: `${index * 100}ms`,
+                    transform: isMenuOpen
+                      ? "translateY(0)"
+                      : "translateY(20px)",
                   }}
                 >
-                  <IconComponent size={20} />
-                  <span className="font-medium text-lg">{item.name}</span>
+                  <IconComponent
+                    size={20}
+                    className={cn(
+                      "transition-transform duration-300",
+                      isActive ? "scale-110" : "group-hover:scale-110",
+                    )}
+                  />
+                  <span className="font-medium">{item.name}</span>
+                  {isActive && (
+                    <div className="w-2 h-2 bg-primary rounded-full" />
+                  )}
                 </a>
               );
             })}

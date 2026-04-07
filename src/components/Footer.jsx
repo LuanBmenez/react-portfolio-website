@@ -1,4 +1,4 @@
-import { ArrowUp, Github, Linkedin, Instagram, Code, Heart } from "lucide-react";
+import { ArrowUp, Github, Linkedin, Instagram, Code, Coffee } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
@@ -25,34 +25,34 @@ export const Footer = () => {
   }, []);
 
   const socialLinks = [
-    { name: "GitHub", href: "https://github.com/LuanBmenez", icon: Github },
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/luan-menezes/", icon: Linkedin },
-    { name: "Instagram", href: "https://www.instagram.com/luanbmenez/", icon: Instagram },
-  ];
-
-  const technologies = ["React", "JavaScript", "C#", "Node.js", "Tailwind CSS", "TypeScript"];
-
-  const navLinks = [
-    { name: "Home", href: "#hero" },
-    { name: "Sobre", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projetos", href: "#projects" },
-    { name: "Contato", href: "#contact" },
-  ];
-
-  const scrollToSection = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    {
+      name: "GitHub",
+      href: "https://github.com/LuanBmenez",
+      icon: Github,
+      color: "hover:text-gray-400"
+    },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/luan-menezes/",
+      icon: Linkedin,
+      color: "hover:text-blue-500"
+    },
+    {
+      name: "Email",
+      href: "https://www.instagram.com/luanbmenez/",
+      icon: Instagram,
+      color: "hover:text-purple-500"
     }
-  };
+  ];
+
+  const technologies = ["React", "JavaScript", "C#", "Node.js", "Tailwind CSS","typescript"];
 
   return (
-    <footer className="py-16 px-4 bg-card/50 border-t border-border/50 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl" />
+    <footer className="py-16 px-4 bg-card border-t border-border mt-12 relative overflow-hidden">
+
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
@@ -60,110 +60,82 @@ export const Footer = () => {
           "transition-all duration-1000",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}>
-          {/* Main grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            {/* Brand */}
-            <div className="lg:col-span-1 space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="space-y-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-teal-400 flex items-center justify-center shadow-lg shadow-primary/25">
-                  <Code className="h-5 w-5 text-primary-foreground" />
+                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-primary to-purple-500 flex items-center justify-center">
+                  <Code className="h-5 w-5 text-white" />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg">Luan Menezes</h3>
-                  <p className="text-xs text-muted-foreground">Desenvolvedor FullStack</p>
+                  <p className="text-sm text-muted-foreground">Desenvolvedor FullStack</p>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Transformando ideias em realidade digital atraves de codigo limpo e solucoes inovadoras.
+                Transformando ideias em realidade digital através de código limpo e soluções inovadoras.
               </p>
             </div>
 
-            {/* Navigation */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                Navegacao
-              </h4>
-              <nav className="flex flex-col gap-2">
-                {navLinks.map((link) => (
+              <h4 className="font-semibold text-lg text-center">Conecte-se</h4>
+              <div className="flex justify-center gap-4">
+                {socialLinks.map((link, index) => (
                   <a
-                    key={link.name}
+                    key={index}
                     href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(link.href);
-                    }}
-                    className="text-sm text-foreground/80 hover:text-primary transition-colors duration-300 w-fit"
+                    target={link.name !== "Email" ? "_blank" : undefined}
+                    rel={link.name !== "Email" ? "noopener noreferrer" : undefined}
+                    className={cn(
+                      "p-3 rounded-full bg-secondary/50 hover:bg-secondary/80 transition-all duration-300 group",
+                      link.color
+                    )}
+                    aria-label={link.name}
                   >
-                    {link.name}
+                    <link.icon className="h-5 w-5 group-hover:scale-110 transition-transform" />
                   </a>
                 ))}
-              </nav>
+              </div>
+              <div className="text-sm text-muted-foreground text-center">
+                <p>menezluan120@gmail.com</p>
+                <p>Disponível para novos projetos</p>
+              </div>
             </div>
 
-            {/* Technologies */}
             <div className="space-y-4">
-              <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                Tecnologias
-              </h4>
+              <h4 className="font-semibold text-lg">Tecnologias</h4>
               <div className="flex flex-wrap gap-2">
-                {technologies.map((tech) => (
+                {technologies.map((tech, index) => (
                   <span
-                    key={tech}
-                    className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full"
+                    key={index}
+                    className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full hover:bg-primary/20 transition-colors"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
-            </div>
-
-            {/* Social */}
-            <div className="space-y-4">
-              <h4 className="font-semibold text-sm uppercase tracking-wider text-muted-foreground">
-                Conecte-se
-              </h4>
-              <div className="flex gap-3">
-                {socialLinks.map((link) => {
-                  const IconComponent = link.icon;
-                  return (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2.5 rounded-xl bg-secondary/50 hover:bg-primary/10 hover:text-primary transition-all duration-300 group"
-                      aria-label={link.name}
-                    >
-                      <IconComponent className="h-5 w-5" />
-                    </a>
-                  );
-                })}
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Coffee className="h-4 w-4" />
+                <span>Feito com muito café e dedicação</span>
               </div>
-              <p className="text-xs text-muted-foreground">
-                menezluan120@gmail.com
-              </p>
             </div>
           </div>
 
-          {/* Divider */}
           <div className="border-t border-border/50 mb-8" />
 
-          {/* Bottom */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground flex items-center gap-1.5 flex-wrap justify-center">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>&copy; {currentYear} Luan Menezes.</span>
-              <span className="hidden sm:inline">Feito com</span>
-              <Heart className="h-4 w-4 text-rose-500 inline" />
-              <span className="hidden sm:inline">e muito codigo.</span>
-            </p>
+              <span className="hidden sm:inline">Todos os direitos reservados.</span>
+              <span className="sm:hidden">Todos os direitos reservados.</span>
+            </div>
 
-            <button 
-              onClick={() => scrollToSection("#hero")}
-              className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300 group"
-              aria-label="Voltar ao topo da pagina"
+            <a 
+              href="#hero" 
+              className="p-3 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-all duration-300 group hover:scale-110"
+              aria-label="Voltar ao topo da página"
             >
-              <ArrowUp className="h-5 w-5 group-hover:-translate-y-1 transition-transform duration-300" />
-            </button>
+              <ArrowUp className="h-5 w-5 group-hover:-translate-y-1 transition-transform" />
+            </a>
           </div>
         </div>
       </div>

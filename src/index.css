@@ -165,19 +165,19 @@
   margin-inline: auto;
   padding-inline: 2rem;
 
-  @media (width: >= 640px) {
+  @media (width >= 640px) {
     max-width: 640px;
   }
-  @media (width: >= 768px) {
+  @media (width >= 768px) {
     max-width: 768px;
   }
-  @media (width: >= 1024px) {
+  @media (width >= 1024px) {
     max-width: 1024px;
   }
-  @media (width: >= 1280px) {
+  @media (width >= 1280px) {
     max-width: 1280px;
   }
-  @media (width: >= 1400px) {
+  @media (width >= 1400px) {
     max-width: 1400px;
   }
 }
@@ -188,7 +188,7 @@
 }
 
 @utility card-hover {
-  @apply transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/5;
+  @apply transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl;
 }
 
 @utility gradient-border {
@@ -204,8 +204,8 @@
 
 @utility cosmic-button {
   @apply px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium transition-all duration-300 
-   hover:shadow-lg hover:shadow-primary/25 hover:scale-105 active:scale-95 
-   focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+   hover:shadow-lg hover:scale-105 active:scale-95 
+   focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
 }
 
 @utility glass-card {

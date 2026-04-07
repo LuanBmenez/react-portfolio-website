@@ -1,7 +1,8 @@
-import { Code, User, Download, Award, Heart, BookOpen, Gamepad2, ArrowRight } from "lucide-react";
+import { Code, User, Download, Award, Heart, BookOpen, Gamepad2 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import resumePdf from "@/assets/Curriculo_Luan_Menezes.pdf";
+import Stats from "./ui/stats";
 
 export const AboutSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,7 +34,7 @@ export const AboutSection = () => {
           }, 500);
         }
       },
-      { threshold: 0.2 },
+      { threshold: 0.3 },
     );
 
     if (sectionRef.current) {
@@ -43,217 +44,200 @@ export const AboutSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const specialties = [
-    {
-      icon: Code,
-      title: "Desenvolvedor FullStack",
-      description: "Transformando ideias em realidade digital, construo aplicacoes web completas e robustas, atuando do backend ao frontend.",
-      tags: ["React", "JavaScript", "C#", "Node.js"],
-      color: "primary",
-    },
-    {
-      icon: BookOpen,
-      title: "Estudante de ADS",
-      description: "Estudante de Analise e Desenvolvimento de Sistemas, construindo uma base solida sobre programacao e desenvolvimento.",
-      tags: ["ADS", "Algoritmos", "Estruturas"],
-      color: "emerald",
-    },
-    {
-      icon: Gamepad2,
-      title: "Desenvolvedor de Jogos",
-      description: "Com paixao por criar mundos imersivos e experiencias interativas, sou um desenvolvedor de jogos focado em Unity.",
-      tags: ["Unity", "C#", "Game Design"],
-      color: "violet",
-    },
-  ];
-
-  const getColorClasses = (color) => {
-    const colors = {
-      primary: {
-        bg: "bg-primary/10",
-        bgHover: "group-hover:bg-primary/20",
-        text: "text-primary",
-        tagBg: "bg-primary/10",
-        tagText: "text-primary",
-      },
-      emerald: {
-        bg: "bg-emerald-500/10",
-        bgHover: "group-hover:bg-emerald-500/20",
-        text: "text-emerald-500",
-        tagBg: "bg-emerald-500/10",
-        tagText: "text-emerald-500",
-      },
-      violet: {
-        bg: "bg-violet-500/10",
-        bgHover: "group-hover:bg-violet-500/20",
-        text: "text-violet-500",
-        tagBg: "bg-violet-500/10",
-        tagText: "text-violet-500",
-      },
-    };
-    return colors[color] || colors.primary;
-  };
-
   return (
     <section
       id="about"
-      className="py-28 px-4 relative overflow-hidden"
+      className="py-24 px-4 relative overflow-hidden"
       ref={sectionRef}
     >
-      {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl" />
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* Header */}
         <div
           className={cn(
-            "text-center mb-20 transition-all duration-1000",
+            "text-center mb-16 transition-all duration-1000",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
           )}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-            Sobre mim
-          </span>
-          <h2 className="section-title">
-            Conheca minha{" "}
-            <span className="text-gradient">jornada</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            Sobre <span className="text-primary">mim</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4 leading-relaxed">
-            Minha paixao por criar solucoes digitais e minha trajetoria na tecnologia
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Conheça minha jornada na tecnologia e minha paixão por criar
+            soluções digitais
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left column - About text */}
           <div
             className={cn(
               "space-y-8 transition-all duration-1000 delay-200",
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8",
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 -translate-x-8",
             )}
           >
-            {/* Profile card */}
-            <div className="glass-card p-8">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-teal-400 flex items-center justify-center shadow-lg shadow-primary/25">
-                  <User className="h-8 w-8 text-primary-foreground" />
+            <div className="space-y-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-purple-500 flex items-center justify-center">
+                  <User className="h-6 w-6 text-white" />
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold">Luan Menezes</h3>
-                  <p className="text-primary font-medium">Desenvolvedor FullStack</p>
+                  <p className="text-primary font-medium">
+                    Desenvolvedor FullStack
+                  </p>
                 </div>
               </div>
 
               <p className="text-muted-foreground leading-relaxed text-lg">
-                Ola! Sou Luan, um desenvolvedor fullstack de 23 anos, embarcando
-                em uma empolgante transicao de carreira para o dinamico mundo da
+                Olá! Sou Luan, um desenvolvedor fullstack de 23 anos, embarcando
+                em uma empolgante transição de carreira para o dinâmico mundo da
                 tecnologia. Com{" "}
                 <span className="text-primary font-semibold">
                   {animatedStats.months} meses
                 </span>{" "}
-                de estudo dedicado e pratico, ja possuo um solido dominio em
-                JavaScript, React para o desenvolvimento web, e C# para solucoes
+                de estudo dedicado e prático, já possuo um sólido domínio em
+                JavaScript, React para o desenvolvimento web, e C# para soluções
                 robustas de backend.
               </p>
 
-              {/* Mini stats */}
-              <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-border">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-foreground">{animatedStats.months}+</div>
-                  <div className="text-xs text-muted-foreground">Meses</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-foreground">{animatedStats.projects}+</div>
-                  <div className="text-xs text-muted-foreground">Projetos</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-foreground">{animatedStats.technologies}+</div>
-                  <div className="text-xs text-muted-foreground">Techs</div>
-                </div>
-              </div>
+              <Stats
+                months={animatedStats.months}
+                projects={animatedStats.projects}
+                technologies={animatedStats.technologies}
+                visible={isVisible}
+              />
             </div>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <a
                 href="#contact"
-                className="cosmic-button group inline-flex items-center justify-center gap-2"
-                aria-label="Ir para secao de contato"
+                className="cosmic-button group flex items-center gap-2 justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                aria-label="Ir para seção de contato"
               >
-                <Heart className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" />
+                <Heart className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" focusable="false" />
                 Entre em contato
-                <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
               </a>
               <a
                 href={resumePdf}
                 download="Curriculo_Luan_Menezes.pdf"
-                className="px-6 py-3 rounded-full border border-border bg-card/50 backdrop-blur-sm text-foreground hover:bg-primary/5 hover:border-primary/30 transition-all duration-300 inline-flex items-center justify-center gap-2 group"
-                aria-label="Baixar curriculo, PDF"
+                className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition-all duration-300 flex items-center gap-2 justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                aria-label="Baixar currículo, PDF"
               >
-                <Download className="h-4 w-4 group-hover:translate-y-0.5 transition-transform" aria-hidden="true" />
-                Baixar curriculo
+                <Download className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" focusable="false" />
+                Baixar currículo
               </a>
             </div>
           </div>
 
-          {/* Right column - Specialties */}
           <div
             className={cn(
-              "space-y-4 transition-all duration-1000 delay-400",
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8",
+              "space-y-6 transition-all duration-1000 delay-400",
+              isVisible
+                ? "opacity-100 translate-x-0"
+                : "opacity-0 translate-x-8",
             )}
           >
-            <div className="flex items-center gap-2 mb-6">
-              <Award className="h-5 w-5 text-primary" />
-              <h3 className="text-xl font-bold">Especialidades</h3>
-            </div>
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <Award className="h-5 w-5 text-primary" />
+                Especialidades
+              </h3>
 
-            {specialties.map((specialty, index) => {
-              const colors = getColorClasses(specialty.color);
-              const IconComponent = specialty.icon;
-
-              return (
-                <div
-                  key={index}
-                  className="glass-card p-6 card-hover group"
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className={cn(
-                      "p-3 rounded-xl transition-colors duration-300",
-                      colors.bg,
-                      colors.bgHover
-                    )}>
-                      <IconComponent className={cn("h-6 w-6", colors.text)} />
-                    </div>
-                    <div className="flex-1 text-left">
-                      <h4 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors duration-300">
-                        {specialty.title}
-                      </h4>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {specialty.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {specialty.tags.map((tag, tagIndex) => (
-                          <span
-                            key={tagIndex}
-                            className={cn(
-                              "px-3 py-1 text-xs font-medium rounded-full transition-colors duration-300",
-                              colors.tagBg,
-                              colors.tagText
-                            )}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+              <div className="gradient-border p-6 card-hover group">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <Code className="h-6 w-6 text-primary" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-semibold text-lg mb-2">
+                      Desenvolvedor FullStack
+                    </h4>
+                    <p className="text-muted-foreground">
+                      Transformando ideias em realidade digital, construo
+                      aplicações web completas e robustas, atuando do backend ao
+                      frontend com tecnologias modernas.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
+                        React
+                      </span>
+                      <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
+                        JavaScript
+                      </span>
+                      <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
+                        C#
+                      </span>
+                      <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
+                        Node.js
+                      </span>
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+
+              <div className="gradient-border p-6 card-hover group">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-green-500/10 group-hover:bg-green-500/20 transition-colors">
+                    <BookOpen className="h-6 w-6 text-green-500" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-semibold text-lg mb-2">
+                      Estudante de ADS
+                    </h4>
+                    <p className="text-muted-foreground">
+                      Estudante de Análise e Desenvolvimento de Sistemas, onde
+                      construo uma base sólida sobre o mundo da programação e
+                      desenvolvimento de software.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      <span className="px-2 py-1 bg-green-500/10 text-green-500 text-xs rounded-full">
+                        ADS
+                      </span>
+                      <span className="px-2 py-1 bg-green-500/10 text-green-500 text-xs rounded-full">
+                        Algoritmos
+                      </span>
+                      <span className="px-2 py-1 bg-green-500/10 text-green-500 text-xs rounded-full">
+                        Estruturas
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="gradient-border p-6 card-hover group">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-full bg-purple-500/10 group-hover:bg-purple-500/20 transition-colors">
+                    <Gamepad2 className="h-6 w-6 text-purple-500" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="font-semibold text-lg mb-2">
+                      Desenvolvedor de Jogos
+                    </h4>
+                    <p className="text-muted-foreground">
+                      Com paixão por criar mundos imersivos e experiências
+                      interativas, sou um desenvolvedor de jogos focado em
+                      Unity.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      <span className="px-2 py-1 bg-purple-500/10 text-purple-500 text-xs rounded-full">
+                        Unity
+                      </span>
+                      <span className="px-2 py-1 bg-purple-500/10 text-purple-500 text-xs rounded-full">
+                        C#
+                      </span>
+                      <span className="px-2 py-1 bg-purple-500/10 text-purple-500 text-xs rounded-full">
+                        Game Design
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
