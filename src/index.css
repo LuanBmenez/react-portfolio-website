@@ -192,14 +192,14 @@
 }
 
 @utility gradient-border {
-  @apply relative rounded-xl;
+  @apply relative rounded-xl transition-colors duration-300;
   background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
   background-clip: padding-box;
   border: 1px solid hsl(var(--border));
-}
-
-@utility gradient-border:hover {
-  border-color: hsl(var(--primary) / 0.3);
+  
+  &:hover {
+    border-color: hsl(var(--primary) / 0.3);
+  }
 }
 
 @utility cosmic-button {
