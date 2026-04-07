@@ -1,23 +1,40 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-input: hsl(var(--input));
 
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
 
   --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius: 0.75rem;
 
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
-  --animate-fade-in: fade-in 0.7s ease-out forwards;
-  --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
-  --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
-  --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
-  --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
+  --animate-fade-in: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in-delay-1: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  --animate-fade-in-delay-2: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  --animate-fade-in-delay-3: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;
+  --animate-fade-in-delay-4: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  --animate-fade-in-delay-5: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
+  --animate-fade-in-delay-6: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  --animate-fade-in-delay-7: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
   --animate-meteor: meteor 5s linear infinite;
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-shimmer: shimmer 2s linear infinite;
 
   @keyframes float {
     0%,
@@ -35,14 +52,14 @@
       opacity: 1;
     }
     50% {
-      opacity: 0.8;
+      opacity: 0.5;
     }
   }
 
   @keyframes fade-in {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(24px);
     }
     to {
       opacity: 1;
@@ -63,41 +80,83 @@
       opacity: 0;
     }
   }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px -10px hsl(var(--primary));
+    }
+    to {
+      box-shadow: 0 0 30px -5px hsl(var(--primary));
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
 }
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
+    --background: 210 20% 98%;
+    --foreground: 220 20% 10%;
 
     --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
 
-    --primary: 250 47% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 172 66% 50%;
+    --primary-foreground: 220 20% 10%;
 
-    --border: 214 32% 91%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 220 20% 30%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 172 66% 95%;
+    --accent-foreground: 172 66% 35%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
   }
 
   .dark {
-    --background: 222 47% 4%;
-    --foreground: 213 31% 91%;
+    --background: 220 25% 6%;
+    --foreground: 210 20% 95%;
 
-    --card: 222 47% 8%;
+    --card: 220 25% 10%;
+    --card-foreground: 210 20% 95%;
 
-    --primary: 250 65% 65%;
-    --primary-foreground: 213 31% 91%;
+    --primary: 172 66% 50%;
+    --primary-foreground: 220 25% 6%;
 
-    --border: 217 33% 20%;
+    --secondary: 220 25% 14%;
+    --secondary-foreground: 210 20% 80%;
+
+    --muted: 220 25% 18%;
+    --muted-foreground: 210 15% 55%;
+
+    --accent: 172 66% 15%;
+    --accent-foreground: 172 66% 65%;
+
+    --border: 220 25% 18%;
+    --input: 220 25% 18%;
   }
-  *padding {
+
+  * {
     @apply border-border;
   }
 
   html {
     @apply scroll-smooth;
   }
+  
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground transition-colors duration-300 antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -125,29 +184,51 @@
 
 @utility text-glow {
   @apply relative;
-  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+  text-shadow: 0 0 20px hsl(var(--primary) / 0.4);
 }
+
 @utility card-hover {
-  @apply transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg;
+  @apply transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/5;
 }
+
 @utility gradient-border {
-  @apply relative rounded-md;
+  @apply relative rounded-xl;
   background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
   background-clip: padding-box;
-  border: 1px solid transparent;
+  border: 1px solid hsl(var(--border));
+}
+
+@utility gradient-border:hover {
+  border-color: hsl(var(--primary) / 0.3);
 }
 
 @utility cosmic-button {
-  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium transition-all duration-300
-   hover:shadow-[0_0_10px_rgba(139,92,246,0.5)] hover:scale-105 active:scale-95;
+  @apply px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium transition-all duration-300 
+   hover:shadow-lg hover:shadow-primary/25 hover:scale-105 active:scale-95 
+   focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
 }
+
+@utility glass-card {
+  @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl;
+}
+
 @utility star {
-  @apply absolute rounded-full bg-white;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+  @apply absolute rounded-full;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.8) 0%, transparent 70%);
+  box-shadow: 0 0 12px 3px hsl(var(--primary) / 0.3);
 }
+
 @utility meteor {
-  @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+  @apply absolute bg-linear-to-r from-primary via-primary/50 to-transparent rounded-full;
+  box-shadow: 0 0 15px 5px hsl(var(--primary) / 0.3);
+}
+
+@utility section-title {
+  @apply text-4xl md:text-5xl font-bold tracking-tight;
+}
+
+@utility text-gradient {
+  @apply bg-gradient-to-r from-primary to-teal-400 bg-clip-text text-transparent;
 }
 
 #root {
@@ -155,4 +236,9 @@
   margin: 0 auto;
   padding: 0;
   text-align: center;
+}
+
+::selection {
+  background: hsl(var(--primary) / 0.2);
+  color: hsl(var(--primary));
 }
