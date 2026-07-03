@@ -1,4 +1,12 @@
-import { Code, User, Download, Award, Heart, BookOpen, Gamepad2 } from "lucide-react";
+import {
+  Code,
+  User,
+  Download,
+  Award,
+  Heart,
+  BookOpen,
+  Gamepad2,
+} from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import resumePdf from "@/assets/Curriculo_Luan_Menezes.pdf";
@@ -21,7 +29,7 @@ export const AboutSection = () => {
 
     if (prefersReducedMotion) {
       setIsVisible(true);
-      setAnimatedStats({ months: 22, projects: 25, technologies: 8 });
+      setAnimatedStats({ months: 28, projects: 30, technologies: 12 });
       return;
     }
 
@@ -30,7 +38,7 @@ export const AboutSection = () => {
         if (entry.isIntersecting) {
           setIsVisible(true);
           setTimeout(() => {
-            setAnimatedStats({ months: 22, projects: 25, technologies: 8 });
+            setAnimatedStats({ months: 28, projects: 30, technologies: 12 });
           }, 500);
         }
       },
@@ -100,7 +108,7 @@ export const AboutSection = () => {
                 <span className="text-primary font-semibold">
                   {animatedStats.months} meses
                 </span>{" "}
-                de estudo dedicado e prático, já possuo um sólido domínio em
+                de trabalho dedicado , já possuo um sólido domínio em
                 JavaScript, React para o desenvolvimento web, e C# para soluções
                 robustas de backend.
               </p>
@@ -119,7 +127,11 @@ export const AboutSection = () => {
                 className="cosmic-button group flex items-center gap-2 justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                 aria-label="Ir para seção de contato"
               >
-                <Heart className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" focusable="false" />
+                <Heart
+                  className="h-4 w-4 group-hover:scale-110 transition-transform"
+                  aria-hidden="true"
+                  focusable="false"
+                />
                 Entre em contato
               </a>
               <a
@@ -128,7 +140,11 @@ export const AboutSection = () => {
                 className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition-all duration-300 flex items-center gap-2 justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                 aria-label="Baixar currículo, PDF"
               >
-                <Download className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" focusable="false" />
+                <Download
+                  className="h-4 w-4 group-hover:scale-110 transition-transform"
+                  aria-hidden="true"
+                  focusable="false"
+                />
                 Baixar currículo
               </a>
             </div>

@@ -1,10 +1,11 @@
-import { X, Menu, Home, User, Code, Briefcase, Mail } from "lucide-react";
+import { X, Menu, Home, User, Code, Briefcase, Mail, Building } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useEffect, useState, useRef, useCallback } from "react";
 
 const navItems = [
   { name: "Home", href: "#hero", icon: Home },
   { name: "Sobre", href: "#about", icon: User },
+  { name: "Experiência", href: "#experience", icon: Building },
   { name: "Habilidades", href: "#skills", icon: Code },
   { name: "Projetos", href: "#projects", icon: Briefcase },
   { name: "Contato", href: "#contact", icon: Mail },

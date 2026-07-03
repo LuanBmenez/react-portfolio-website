@@ -120,7 +120,7 @@ export const HeroSection = () => {
             <div className="text-center">
               <div className="text-2xl font-bold text-primary">2+</div>
               <div className="text-sm text-muted-foreground">
-                Anos de estudo
+                Anos de experiência
               </div>
             </div>
             <div className="text-center">
