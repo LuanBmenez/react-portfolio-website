@@ -8,20 +8,12 @@ import {
   Send,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect, useRef } from "react";
-import emailjs from "@emailjs/browser";
-import { EMAILJS_CONFIG } from "@/config/emailjs";
+import { useContactForm } from "@/hooks/useContactForm";
+import { SocialLink } from "./ui/SocialLink";
 
 export const ContactSection = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [errors, setErrors] = useState({});
+  const { formData, errors, isSubmitting, handleChange, handleSubmit } = useContactForm();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -43,121 +35,6 @@ export const ContactSection = () => {
 
     return () => observer.disconnect();
   }, []);
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validateField = (name, value) => {
-    const newErrors = { ...errors };
-
-    switch (name) {
-      case "name":
-        if (value.length < 2) {
-          newErrors.name = "Nome deve ter pelo menos 2 caracteres";
-        } else {
-          delete newErrors.name;
-        }
-        break;
-      case "email":
-        if (value && !validateEmail(value)) {
-          newErrors.email = "Email inválido";
-        } else {
-          delete newErrors.email;
-        }
-        break;
-      case "message":
-        if (value.length < 10) {
-          newErrors.message = "Mensagem deve ter pelo menos 10 caracteres";
-        } else {
-          delete newErrors.message;
-        }
-        break;
-      default:
-        break;
-    }
-
-    setErrors(newErrors);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-    validateField(name, value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const finalErrors = {};
-    if (formData.name.length < 2)
-      finalErrors.name = "Nome deve ter pelo menos 2 caracteres";
-    if (!validateEmail(formData.email)) finalErrors.email = "Email inválido";
-    if (formData.message.length < 10)
-      finalErrors.message = "Mensagem deve ter pelo menos 10 caracteres";
-
-    if (Object.keys(finalErrors).length > 0) {
-      setErrors(finalErrors);
-      toast({
-        title: "Erro de validação",
-        description: "Por favor, corrija os erros no formulário.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      if (EMAILJS_CONFIG.serviceId === "service_your_service_id") {
-        throw new Error("EmailJS não configurado");
-      }
-
-      await emailjs.send(
-        EMAILJS_CONFIG.serviceId,
-        EMAILJS_CONFIG.templateId,
-        {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          to_name: "Luan Menezes",
-        },
-        EMAILJS_CONFIG.publicKey
-      );
-
-      toast({
-        title: "Mensagem enviada com sucesso!",
-        description:
-          "Obrigado pela sua mensagem. Entrarei em contato com você em breve.",
-      });
-
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-      });
-    } catch (error) {
-      console.error("Erro ao enviar mensagem:", error);
-
-      const subject = encodeURIComponent("Contato do Portfólio");
-      const body = encodeURIComponent(
-        `Nome: ${formData.name}\nEmail: ${formData.email}\n\nMensagem:\n${formData.message}`
-      );
-      const mailtoLink = `mailto:Menezluan120@gmail.com?subject=${subject}&body=${body}`;
-      window.open(mailtoLink);
-
-      toast({
-        title: "Redirecionando para email",
-        description: "Abriremos seu cliente de email para enviar a mensagem.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
   return (
     <section
       ref={sectionRef}
@@ -236,33 +113,21 @@ export const ContactSection = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4">Redes Sociais</h4>
               <div className="flex space-x-4 justify-center">
-                <a
+                <SocialLink 
                   href="https://www.linkedin.com/in/luan-menezes/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Perfil do LinkedIn"
-                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
-                >
-                  <Linkedin className="h-6 w-6 text-primary" />
-                </a>
-                <a
+                  ariaLabel="Perfil do LinkedIn"
+                  icon={Linkedin}
+                />
+                <SocialLink 
                   href="https://www.instagram.com/luanbmenez/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Perfil do Instagram"
-                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
-                >
-                  <Instagram className="h-6 w-6 text-primary" />
-                </a>
-                <a
+                  ariaLabel="Perfil do Instagram"
+                  icon={Instagram}
+                />
+                <SocialLink 
                   href="https://github.com/LuanBmenez"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Perfil do GitHub"
-                  className="p-2 rounded-full hover:bg-primary/10 transition-colors"
-                >
-                  <Github className="h-6 w-6 text-primary" />
-                </a>
+                  ariaLabel="Perfil do GitHub"
+                  icon={Github}
+                />
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { SocialLink } from "./ui/SocialLink";
 
 export const HeroSection = () => {
   const [currentText, setCurrentText] = useState("");
@@ -90,7 +91,7 @@ export const HeroSection = () => {
             <span className="text-primary opacity-0 animate-fade-in-delay-1 block sm:inline">
               Luan
             </span>
-            <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent sm:ml-2 opacity-0 animate-fade-in-delay-2 block sm:inline">
+            <span className="bg-linear-to-r from-primary to-purple-600 bg-clip-text text-transparent sm:ml-2 opacity-0 animate-fade-in-delay-2 block sm:inline">
               Menezes
             </span>
           </h1>
@@ -101,7 +102,7 @@ export const HeroSection = () => {
               <span
                 className={cn(
                   "ml-1 text-primary",
-                  showCursor ? "opacity-100" : "opacity-0"
+                  showCursor ? "opacity-100" : "opacity-0",
                 )}
               >
                 |
@@ -138,7 +139,11 @@ export const HeroSection = () => {
               className="cosmic-button group flex items-center gap-2"
               aria-label="Ver meus projetos"
             >
-              <Briefcase className="h-4 w-4 group-hover:rotate-12 transition-transform" aria-hidden="true" focusable="false" />
+              <Briefcase
+                className="h-4 w-4 group-hover:rotate-12 transition-transform"
+                aria-hidden="true"
+                focusable="false"
+              />
               Ver Projetos
             </a>
             <a
@@ -155,31 +160,27 @@ export const HeroSection = () => {
               className="px-6 py-3 rounded-full border border-border text-foreground hover:bg-secondary transition-all duration-300 flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
               aria-label="Baixar currículo, PDF"
             >
-              <Download className="h-4 w-4 group-hover:scale-110 transition-transform" aria-hidden="true" focusable="false" />
+              <Download
+                className="h-4 w-4 group-hover:scale-110 transition-transform"
+                aria-hidden="true"
+                focusable="false"
+              />
               Baixar currículo
             </a>
           </div>
 
           {/* Redes sociais */}
           <div className="flex justify-center gap-4 pt-4 opacity-0 animate-fade-in-delay-7">
-            <a
+            <SocialLink
               href="https://github.com/LuanBmenez"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-secondary/50 hover:bg-primary/10 transition-all duration-300 group"
-              aria-label="GitHub"
-            >
-              <Github className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all" />
-            </a>
-            <a
+              ariaLabel="GitHub"
+              icon={Github}
+            />
+            <SocialLink
               href="https://www.linkedin.com/in/luan-menezes/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-secondary/50 hover:bg-primary/10 transition-all duration-300 group"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all" />
-            </a>
+              ariaLabel="LinkedIn"
+              icon={Linkedin}
+            />
           </div>
         </div>
       </div>
